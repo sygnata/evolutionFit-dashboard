@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'features/auth/login_page.dart';
 
 void main() {
   runApp(const EvolutionFitDashboardApp());
@@ -9,17 +10,9 @@ class EvolutionFitDashboardApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'EvolutionFit Dashboard',
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'EvolutionFit Dashboard',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-      ),
+      home: LoginPage(),
     );
   }
 }
