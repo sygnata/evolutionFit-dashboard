@@ -1,3 +1,5 @@
+import '/features/admin/dashboard/admin_dashboard_page.dart';
+import '/features/personal/dashboard/personal_dashboard_page.dart';
 import 'package:flutter/material.dart';
 import '../../core/auth/auth_service.dart';
 import 'login_controller.dart';
@@ -22,19 +24,25 @@ class _LoginPageState extends State<LoginPage> {
     _controller.addListener(_onStateChanged);
   }
 
-  void _onStateChanged() {
-    if (!_controller.state.loading && _controller.state.error == null) {
-      // TODO: redirecionar conforme role
+void _onStateChanged() {
+  if (!_controller.state.loading &&
+      _controller.state.error == null &&
+      _controller.role != null) {
+
+    if (_controller.role == 'ADMIN') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Login realizado com sucesso')),
-          ),
-        ),
+        MaterialPageRoute(builder: (_) => const AdminDashboardPage()),
+      );
+    } else if (_controller.role == 'PERSONAL') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const PersonalDashboardPage()),
       );
     }
   }
+}
+
 
   @override
   void dispose() {

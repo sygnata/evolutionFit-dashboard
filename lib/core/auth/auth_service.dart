@@ -6,7 +6,7 @@ class AuthService {
   final Dio _dio = DioClient.create();
   final TokenStorage _storage = TokenStorage();
 
-  Future<void> login(String email, String senha) async {
+  Future<String> login(String email, String senha) async {
     final response = await _dio.post(
       '/api/auth/login',
       data: {
@@ -17,6 +17,8 @@ class AuthService {
 
     final token = response.data['token'];
     await _storage.save(token);
+
+    return token;
   }
 
   Future<void> logout() async {
